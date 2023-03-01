@@ -5,6 +5,8 @@ import Statistics from "./components/Statistics";
 import Section from "./components/Section";
 import Notification from "./components/Notification";
 
+const options = ["good", "neutral", "bad"];
+
 class App extends Component {
   state = {
     good: 0,
@@ -12,21 +14,10 @@ class App extends Component {
     bad: 0,
   };
 
-  increaseGood = () => {
-    this.setState((previousState) => ({
-      good: previousState.good + 1,
-    }));
-  };
-
-  increaseNeutral = () => {
-    this.setState((previousState) => ({
-      neutral: previousState.neutral + 1,
-    }));
-  };
-
-  increaseBad = () => {
-    this.setState((previousState) => ({
-      bad: previousState.bad + 1,
+  onLeaveFeedback = (e) => {
+    const data = e.target.dataset.feedback;
+    this.setState((prevState) => ({
+      [data]: prevState[data] + 1,
     }));
   };
 
@@ -53,9 +44,8 @@ class App extends Component {
       <div className="App">
         <Section title={"Please leave feedback"}>
           <FeedbackOptions
-            onIncreaseGood={this.increaseGood}
-            onIncreaseNeutral={this.increaseNeutral}
-            onIncreaseBad={this.increaseBad}
+            options={options}
+            onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
         <Section title={"Statistics"}>

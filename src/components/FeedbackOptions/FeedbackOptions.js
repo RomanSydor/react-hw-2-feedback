@@ -1,13 +1,16 @@
-const FeedbackOptions = ({
-  onIncreaseGood,
-  onIncreaseNeutral,
-  onIncreaseBad,
-}) => {
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <div>
-      <button onClick={onIncreaseGood}>Good</button>
-      <button onClick={onIncreaseNeutral}>Neutral</button>
-      <button onClick={onIncreaseBad}>Bad</button>
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={onLeaveFeedback}
+          data-feedback={option}
+        >
+          {option}
+        </button>
+      ))}
     </div>
   );
 };
